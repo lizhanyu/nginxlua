@@ -1,6 +1,7 @@
-local http = require "resty.http"   -- ①
+--https://github.com/pintsized/lua-resty-http/archive/master.zip
+local http = require "resty.http"   
 local httpc = http.new()
-local res, err = httpc:request_uri( -- ②
+local res, err = httpc:request_uri( 
       "http://140.143.170.39:8083/study/coin/info",
        {
             method = "GET",
