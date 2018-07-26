@@ -6,7 +6,9 @@ local res, err = httpc:request_uri(
        {
             method = "GET",
             path="/study/coin/info",
-            headers={}
+            headers={
+            	["Content-Type"] = "charset=utf-8",
+        	}
         }
     )
 if 	200 ~= res.status then
