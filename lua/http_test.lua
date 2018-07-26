@@ -7,7 +7,7 @@ local res, err = httpc:request_uri(
             method = "GET",
             path="/study/coin/info",
             headers={
-            	["Content-Type"] = "charset=utf-8",
+            	["Content-Type"] = "application/json;charset=UTF-8",
         	}
         }
     )
