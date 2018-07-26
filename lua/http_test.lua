@@ -12,9 +12,7 @@ local res, err = httpc:request_uri(
 if 	200 ~= res.status then
         ngx.say(res.status)
 end
-if args.key == res.body then
-        ngx.say(res.body )
-else
-        ngx.say("invalid request")
-end
+
+    ngx.say(res.body )
+
 
