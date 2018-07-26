@@ -2,13 +2,15 @@
 local http = require "resty.http"   
 local httpc = http.new()
 local res, err = httpc:request_uri( 
-      "http://140.143.170.39:8083/study/coin/info",
+      "http://140.143.170.39:8083",
        {
             method = "GET",
+            path="/study/coin/info",
+            headers={}
         }
     )
 if 	200 ~= res.status then
-        ngx.exit(res.status)
+        ngx.say(res.status)
 end
 if args.key == res.body then
         ngx.say(res.body )
