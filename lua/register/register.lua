@@ -12,7 +12,7 @@ local info 	   = uri_args.info
     if k ==   
 end  --]]
  ngx.say("username : ", username, " , password : ", password, " , info : ", info) 
- require "register_db"
+ require "register_db.lua"
  register_db.insertUser(username,password,info)
 
 
