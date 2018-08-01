@@ -1,4 +1,5 @@
 module("register_db", package.seeall)
+
 function destroy(...)
     package.loaded["register_db"] = nil
 end
@@ -19,31 +20,37 @@ local function close_db(db)
     end
    -- db:close()  
 end  
-  
+
 local mysql = require("resty.mysql")  
 --创建实例  
-local db, err = mysql:new()  
-if not db then  
-    ngx.say("new mysql error : ", err)  
-    return  
-end  
---设置超时时间(毫秒)  
-db:set_timeout(1000)  
+local db
+function init( ... )
+    db, err = mysql:new()  
+    if not db then  
+        ngx.say("new mysql error : ", err)  
+        return  
+    end  
+    --设置超时时间(毫秒)  
+    db:set_timeout(1000)  
+    local props = {  
+        host = "192.168.40.8",  
+        port = 3306,  
+        database = "study",  
+        user = "root",  
+        password = "123456"  
+    }  
   
-local props = {  
-    host = "192.168.40.8",  
-    port = 3306,  
-    database = "study",  
-    user = "root",  
-    password = "123456"  
-}  
+    local res, err, errno, sqlstate = db:connect(props)  
   
-local res, err, errno, sqlstate = db:connect(props)  
-  
-if not res then  
-   ngx.say("connect to mysql error : ", err, " , errno : ", errno, " , sqlstate : ", sqlstate)  
-   return close_db(db)  
+    if not res then  
+       ngx.say("connect to mysql error : ", err, " , errno : ", errno, " , sqlstate : ", sqlstate)  
+       return close_db(db)  
+    end
 end
+
+
+  
+
 function insertUser( username,password,info)
     local insert_sql = "insert into user (id,username,psd,activity,info) values(0,'" .. username .."','"..password.."',1,'"..info.."' )";  
     res, err, errno, sqlstate = db:query(insert_sql)  
