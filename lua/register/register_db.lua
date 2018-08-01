@@ -45,8 +45,7 @@ if not res then
    return close_db(db)  
 end
 function insertUser( username,password,info)
-    local insert_sql = "insert into user (id,username,psd,activity,info) 
-    values(0,'" .. username .."','"..password.."',1,'"..info.."' )";  
+    local insert_sql = "insert into user (id,username,psd,activity,info) values(0,'" .. username .."','"..password.."',1,'"..info.."' )";  
     res, err, errno, sqlstate = db:query(insert_sql)  
     if not res then  
        ngx.say("insert error : ", err, " , errno : ", errno, " , sqlstate : ", sqlstate)  
