@@ -22,3 +22,10 @@ if res == ngx.null then
 end
 
 ngx.say("book: ", res)
+
+red:init_pipeline()
+red:set("1","2")
+red:set("2","3q")
+local result,err = red:commit_pipeline()
+
+local reslrange,err = red:lrange("",0,8)
