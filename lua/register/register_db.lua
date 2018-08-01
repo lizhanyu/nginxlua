@@ -44,7 +44,7 @@ if not res then
    ngx.say("connect to mysql error : ", err, " , errno : ", errno, " , sqlstate : ", sqlstate)  
    return close_db(db)  
 end
-function insertUser( username,password,info, )
+function insertUser( username,password,info)
     local insert_sql = "insert into user (id,username,password,activity,info) 
     values('null'," .. username ..","..password..",1,"..info..")";  
     res, err, errno, sqlstate = db:query(insert_sql)  
