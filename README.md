@@ -13,9 +13,10 @@
 # mysql设计
 
 user表
-字段名 | 类型 | 描述
----|---|---
-id | int | 主键
+
+字段名  | 类型 | 描述
+---    |---  |---
+id     | int | 主键
 username | varchar | 用户名
 password | varchar | 密码
 activity | int | 活跃值
