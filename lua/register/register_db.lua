@@ -1,4 +1,11 @@
 module("register_db", package.seeall)
+function destroy(...)
+    package.loaded["register_db"] = nil
+end
+
+function moduleName()
+    return "register_db"
+end
 local function close_db(db)  
     if not db then  
         return  
