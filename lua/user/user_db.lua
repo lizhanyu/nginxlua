@@ -59,9 +59,9 @@ function insertUser( username,password,info)
     return res
 end
 
-function getUser( ... ) 
+function getUser( id ) 
     local userObj   = {} 
-    local select_sql = "select id,username, activity,info from user"  
+    local select_sql = "select id,username, activity,info from user where id="..id  
     res, err, errno, sqlstate = db:query(select_sql) 
     if not res then  
         ngx.say("select error : ", err, " , errno : ", errno, " , sqlstate : ", sqlstate)  
