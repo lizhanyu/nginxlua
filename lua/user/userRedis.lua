@@ -41,9 +41,6 @@ end
 function getUserInfo( userId )
     local key = keyBuild(userId)
     local value = red:get(key)
-    if value=="null" then
-        value =nil
-    end
     return value
 end
 function setUserInfo(userId, username,info,activity )
