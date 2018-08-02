@@ -1,6 +1,7 @@
 
 module("userRedis", package.seeall)
 local cjson = require("cjson")  
+local redis = require("resty.redis")  
 function destroy(...)
     package.loaded["userRedis"] = nil
 end
