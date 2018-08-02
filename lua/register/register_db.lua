@@ -58,4 +58,5 @@ function insertUser( username,password,info)
        ngx.say("insert error : ", err, " , errno : ", errno, " , sqlstate : ", sqlstate)  
        return close_db(db)  
     end  
+    ngx.say("success")
 end  
