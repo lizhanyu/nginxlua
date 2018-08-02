@@ -69,15 +69,15 @@ function getUser( ... )
     end 
     for i, row in ipairs(res) do  
        for name, value in pairs(row) do  
-         ngx.say("select row ", i, " : ", name, " = ", value, "<br/>")  
+        -- ngx.say("select row ", i, " : ", name, " = ", value, "<br/>")  
             if name=="id" then
-                userObj.id = id 
+                userObj.id = value 
             elseif name =="username" then
-                userObj.name = username
+                userObj.name = value
             elseif name == "info" then
-                userObj.info = info
+                userObj.info = value
             elseif name=="activity" then
-                userObj.activity = activity
+                userObj.activity = value
             else
 
             end
