@@ -1,11 +1,11 @@
-module("register_db", package.seeall)
+module("user_db", package.seeall)
 
 function destroy(...)
-    package.loaded["register_db"] = nil
+    package.loaded["user_db"] = nil
 end
 
 function moduleName()
-    return "register_db"
+    return "user_db"
 end
 local function close_db(db)  
     if not db then  
@@ -49,14 +49,39 @@ function init( ... )
 end
 
 
-  
-
 function insertUser( username,password,info)
     local insert_sql = "insert into user (id,username,psd,activity,info) values(0,'" .. username .."','"..password.."',1,'"..info.."' )";  
     res, err, errno, sqlstate = db:query(insert_sql)  
     if not res then  
        ngx.say("insert error : ", err, " , errno : ", errno, " , sqlstate : ", sqlstate)  
        return close_db(db)  
-    end  
-    ngx.say("success")
+    end   
+    return res
+end
+
+function getUser( ... ) 
+    local userObj   = {} 
+    local select_sql = "select id,username, activity,info from user"  
+    res, err, errno, sqlstate = db:query(select_sql) 
+    if not res then  
+        ngx.say("select error : ", err, " , errno : ", errno, " , sqlstate : ", sqlstate)  
+        return close_db(db) 
+    end 
+    for i, row in ipairs(res) do  
+       for name, value in pairs(row) do  
+         ngx.say("select row ", i, " : ", name, " = ", value, "<br/>")  
+            if name=="id" then
+                userObj.id = userId 
+            elseif name =="username" then
+                userObj.name = username
+            elseif name == "info" then
+                userObj.info = info
+            elseif name=="activity"
+                userObj.activity = activity
+            else
+
+            end
+       end  
+    end 
+    return userObj 
 end  
