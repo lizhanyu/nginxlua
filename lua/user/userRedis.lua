@@ -43,6 +43,11 @@ function getUserInfo( userId )
     local value = red:get(key)
     return value
 end
+function delUserInfo( userId )
+    local key = keyBuild(userId)
+    local value = red:del(key)
+    return value
+end
 function setUserInfo(userId, username,info,activity )
     local obj   = {}
     obj.name    = username

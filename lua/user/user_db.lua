@@ -60,7 +60,7 @@ end
 function insertUser( username,password,info)
     local password = getUser(username)
     if password ~= nil then
-        ngx.say("username 已经注册过了")  
+        ngx.say("username has been registered")  
        return close_db(db)  
     end
     local insert_sql = "insert into user (id,username,psd,activity,info) values(0,'" .. username .."','"..password.."',1,'"..info.."' )";  
