@@ -8,6 +8,7 @@ userInfo = userRedis.getUserInfo(id)
 ngx.say("userInfo ",userInfo) 
 if userInfo == ngx.null  then
 	require "lua/user/user_db"
+	user_db.init()
 	userObj  = user_db.getUser(id)
 	ngx.say("read db ") 
 	userInfo = userRedis.setUserInfo(userObj.id, userObj.username,userObj.info,userObj.activity)
