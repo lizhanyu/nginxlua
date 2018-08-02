@@ -5,6 +5,7 @@ ngx.say("id : ", id)
 require "lua/user/userRedis"
 userRedis.init()
 userInfo = userRedis.getUserInfo(id)
+ngx.say("userInfo ",userInfo) 
 if userInfo == nil  then
 	require "lua/user/user_db"
 	userObj  = user_db.getUser(id)
