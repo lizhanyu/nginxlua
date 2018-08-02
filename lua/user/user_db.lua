@@ -47,9 +47,22 @@ function init( ... )
        return close_db(db)  
     end
 end
-
+--累计活跃值
+function updateActivity( id )
+    local update_sql = "update  user set activity =  activity + 1 where id = "..id  
+    res, err, errno, sqlstate = db:query(update_sql) 
+    if not res then  
+       ngx.say("update error : ", err, " , errno : ", errno, " , sqlstate : ", sqlstate)  
+       return close_db(db)  
+    end    
+end
 
 function insertUser( username,password,info)
+    local password = getUser(username)
+    if password ~= nil then
+        ngx.say("username 已经注册过了")  
+       return close_db(db)  
+    end
     local insert_sql = "insert into user (id,username,psd,activity,info) values(0,'" .. username .."','"..password.."',1,'"..info.."' )";  
     res, err, errno, sqlstate = db:query(insert_sql)  
     if not res then  
@@ -69,7 +82,6 @@ function getUser( id )
     end 
     for i, row in ipairs(res) do  
        for name, value in pairs(row) do  
-        -- ngx.say("select row ", i, " : ", name, " = ", value, "<br/>")  
             if name=="id" then
                 userObj.id = value 
             elseif name =="username" then
@@ -84,4 +96,24 @@ function getUser( id )
        end  
     end 
     return userObj 
+end 
+function getUserByname( username ) 
+    local password = nil 
+    local id = nil
+    local select_sql = "select id, psd from user where username= '"..username.."'"  
+    res, err, errno, sqlstate = db:query(select_sql) 
+    if not res then  
+        ngx.say("select error : ", err, " , errno : ", errno, " , sqlstate : ", sqlstate)  
+        return close_db(db) 
+    end 
+    for i, row in ipairs(res) do  
+       for name, value in pairs(row) do  
+            if name=="psd" then
+                password = value 
+            elseif name =="id" then
+                id = value
+            end
+       end  
+    end 
+    return password ,id
 end  
