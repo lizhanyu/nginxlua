@@ -76,7 +76,7 @@ function getUser( ... )
                 userObj.name = username
             elseif name == "info" then
                 userObj.info = info
-            elseif name=="activity"
+            elseif name=="activity" then
                 userObj.activity = activity
             else
 
