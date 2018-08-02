@@ -51,6 +51,4 @@ function setUserInfo(userId, username,info,activity )
     local key   = keyBuild(userId)
     red:set(key,value)
     return value
-}  
-
 end
