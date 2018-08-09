@@ -1,8 +1,8 @@
 local uri_args = ngx.req.get_uri_args()  
 local username = uri_args.username
 local password = uri_args.password
-require "/usr/example/nginxlua/lua/user/user_db"
-require "/usr/example/nginxlua/lua/user/userRedis"
+require "/lua/user/user_db"
+require "/lua/user/userRedis"
 user_db.init()
 psd,id  = user_db.getUserByname(username)
 if psd ~= nil then 

@@ -1,11 +1,11 @@
 local uri_args = ngx.req.get_uri_args()  
 local id = uri_args.id
 local userInfo 
-require "/usr/example/nginxlua/lua/user/userRedis"
+require "/lua/user/userRedis"
 userRedis.init()
 userInfo = userRedis.getUserInfo(id)
 if userInfo == ngx.null  then
-	require "/usr/example/nginxlua/lua/user/user_db"
+	require "/lua/user/user_db"
 	user_db.init()
 	userObj  = user_db.getUser(id)
  	userInfo = userRedis.setUserInfo(userObj.id, userObj.username,userObj.info,userObj.activity)

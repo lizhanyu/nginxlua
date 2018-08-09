@@ -5,8 +5,8 @@ local password = uri_args.password
 local info 	   = uri_args.info 
 local insertRes
  ngx.say("username : ", username, " , password : ", password, " , info : ", info) 
- require "/usr/example/nginxlua/lua/user/user_db"
- require "/usr/example/nginxlua/lua/user/userRedis"
+ require "/lua/user/user_db"
+ require "/lua/user/userRedis"
  user_db.init()
  insertRes = user_db.insertUser(username,password,info)
  userRedis.init()
